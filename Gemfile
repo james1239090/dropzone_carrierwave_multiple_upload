@@ -39,6 +39,7 @@ gem 'carrierwave', '~> 1.0'
 gem 'simple_form'
 gem 'dropzonejs-rails'
 gem 'mini_magick'
+gem 'bootstrap-sass'
 
 
 group :development, :test do

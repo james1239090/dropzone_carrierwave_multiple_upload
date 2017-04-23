@@ -1,6 +1,6 @@
 <h2>Product List</h2>
-<%= link_to("New Product", new_product_path) %>
-<table>
+<%= link_to("New Product", new_product_path,class:"btn btn-info pull-right") %>
+<table class="table table-bordered">
   <thead>
     <th>#</th>
     <th>Name</th>
@@ -14,12 +14,12 @@
       <td><%= product.name %></td>
       <td>
         <% product.photo.images.each do |image| %>
-          <%= image_tag(image.thumb.url) %>
+          <%= image_tag(image.thumb.url,class:"thumbnail") %>
         <% end %>
       </td>
       <td>
-        <%= link_to("Edit", edit_product_path(product)) %>
-        <%= link_to("Delete", product_path(product),method: :delete, data:{confirm: "Are you sure ?"}) %>
+        <%= link_to("Edit", edit_product_path(product),class: "btn btn-success") %>
+        <%= link_to("Delete", product_path(product),method: :delete, data:{confirm: "Are you sure ?"},class: "btn btn-danger") %>
       </td>
     </tr>
     <% end %>
