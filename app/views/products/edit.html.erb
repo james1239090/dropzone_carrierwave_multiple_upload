@@ -1,0 +1,67 @@
+<h2>Edit Product</h2>
+<%= simple_form_for @product do  |f| %>
+  <%= f.input :name %>
+  <div id="myDorpzone" class="dropzone">
+    <%= f.simple_fields_for :photo do |c| %>
+      <div class="fallback">
+        <%= c.input :images , as: :file,  input_html: { multiple: 'multiple'} %>
+      </div>
+    <% end %>
+  </div>
+  <%= f.submit "Submit" %>
+<% end %>
+
+<script type="text/javascript">
+  $(function(){
+      var post_url = "/products/"+<%= @product.id %>+"/photos";
+      var myDropzone = new Dropzone("#myDorpzone", {
+        url: post_url,
+        method: "POST",
+        paramName: "photo[images]",
+        uploadMultiple: true,
+        autoProcessQueue: false,
+        addRemoveLinks: true,
+        parallelUploads: 100,
+        maxFiles: 100,
+        removedfile: function(file){
+          var _ref,
+              product_id = file.product_id,
+              image_index = file.index,
+              url = "/products/" + product_id + "/photos/" + image_index;
+          $.ajax({
+              type: 'DELETE',
+              url: url
+          });
+          return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+        },
+        headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+        init: function() {
+          var myDropzone = this;
+          $("input[type='submit']").on("click", function(e) {
+              if (myDropzone.getQueuedFiles().length > 0) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  myDropzone.processQueue();
+                  return;
+              }
+          });
+          this.on("successmultiple", function(files, response) {
+            window.location.href = '<%= root_path %>'
+          });
+        }
+      });
+      <% @product.photo.images.each_with_index do |image, index| %>
+        var mockFile = {
+          name: "<%= image.file.filename %>",
+          size: <%= image.size %>,
+          index: <%= index %>,
+          product_id : <%= @product.id %>
+        }
+        myDropzone.emit("addedfile", mockFile);
+        myDropzone.createThumbnailFromUrl(mockFile, "<%= image.url %>");
+        myDropzone.emit("complete", mockFile);
+        myDropzone.files.push(mockFile);
+      <% end %>
+    });
+</script>
