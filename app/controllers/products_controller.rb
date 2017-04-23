@@ -30,7 +30,7 @@ class ProductsController < ApplicationController
 
   def update
     @product = Product.find(params[:id])
-    if @user.update(product_params)
+    if @product.update(product_params)
       redirect_to root_path
     else
       render :edit
