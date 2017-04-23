@@ -1,0 +1,27 @@
+<h2>Product List</h2>
+<%= link_to("New Product", new_product_path) %>
+<table>
+  <thead>
+    <th>#</th>
+    <th>Name</th>
+    <th>Images</th>
+    <th>Action</th>
+  </thead>
+  <tbody>
+  <% @products.each do |product| %>
+    <tr>
+      <td><%= product.id %></td>
+      <td><%= product.name %></td>
+      <td>
+        <% product.photo.images.each do |image| %>
+          <%= image_tag(image.url) %>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to("Edit", edit_product_path(product)) %>
+        <%= link_to("Delete", product_path(product),method: :delete, data:{confirm: "Are you sure ?"}) %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
