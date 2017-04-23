@@ -14,7 +14,7 @@
       <td><%= product.name %></td>
       <td>
         <% product.photo.images.each do |image| %>
-          <%= image_tag(image.url) %>
+          <%= image_tag(image.thumb.url) %>
         <% end %>
       </td>
       <td>

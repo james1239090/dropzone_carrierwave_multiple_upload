@@ -38,6 +38,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'carrierwave', '~> 1.0'
 gem 'simple_form'
 gem 'dropzonejs-rails'
+gem 'mini_magick'
 
 
 group :development, :test do
