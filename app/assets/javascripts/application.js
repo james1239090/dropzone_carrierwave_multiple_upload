@@ -15,3 +15,7 @@
 //= require turbolinks
 //= require dropzone
 //= require_tree .
+
+$(function() {
+  Dropzone.autoDiscover = false;
+});

@@ -1,0 +1,46 @@
+<h2>New Product</h2>
+<%= simple_form_for @product do  |f| %>
+  <%= f.input :name %>
+  <div id="myDropzone" class="dropzone">
+    <%= f.simple_fields_for :photo do |c| %>
+      <div class="fallback">
+        <%= c.input :images , as: :file,  input_html: { multiple: 'multiple'} %>
+      </div>
+    <% end %>
+  </div>
+  <%= f.submit "Submit" %>
+<% end %>
+<script type="text/javascript">
+  $(function(){
+      var myDropzone = new Dropzone("#myDropzone", {
+        url: "/products",
+        paramName: "product[photo_attributes][images]",
+        uploadMultiple: true,
+        addRemoveLinks: true,
+        autoProcessQueue: false,
+        parallelUploads: 100,
+        maxFiles: 100,
+        headers: {
+          'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        },
+        init: function() {
+          var myDropzone = this;
+          $("input[type='submit']").on("click", function(e) {
+              if (myDropzone.getQueuedFiles().length > 0){
+                e.preventDefault();
+                e.stopPropagation();
+                myDropzone.processQueue();
+                return;
+              }
+          });
+          this.on("sendingmultiple", function(data, xhr, formData) {
+            formData.append("product[name]",$('#product_name').val());
+          });
+          this.on("successmultiple", function(files, response) {
+            window.location.href = '<%= products_path %>'
+          });
+        }
+      });
+
+    });
+</script>
