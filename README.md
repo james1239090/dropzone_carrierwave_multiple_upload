@@ -1,24 +1,19 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project is an example that integrated nested form, carrierwave, mini_magick, and dropzon.js.
 
-Things you may want to cover:
+User can upload, edit, delete, and show multiple images.
 
-* Ruby version
+* Ruby version :  2.3.0
 
-* System dependencies
+* Gem require :
+  - [carrierwave > 1.0](https://github.com/carrierwaveuploader/carrierwave)
+  - [dropzonejs-rails](https://github.com/ncuesta/dropzonejs-rails)
+  - [mini_magick](https://github.com/minimagick/minimagick)
+* Database
+  - sqlite3
+  - If you want to use other database
+    - [check here first](https://github.com/carrierwaveuploader/carrierwave#user-content-multiple-file-uploads)
+    - **remove** `serialize :images, JSON` on `model/photo.rb`
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+![alt tag](http://www.giphy.com/gifs/3o7buhrx0bZ8UZEgnu)
