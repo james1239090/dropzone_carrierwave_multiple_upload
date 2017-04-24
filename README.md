@@ -16,4 +16,4 @@ User can upload, edit, delete, and show multiple images.
     - [check here first](https://github.com/carrierwaveuploader/carrierwave#user-content-multiple-file-uploads)
     - **remove** `serialize :images, JSON` on `model/photo.rb`
 
-![alt tag](http://www.giphy.com/gifs/3o7buhrx0bZ8UZEgnu)
+![alt tag](https://media.giphy.com/media/3o7buhrx0bZ8UZEgnu/giphy.gif)
